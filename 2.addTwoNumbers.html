@@ -17,21 +17,48 @@
 您可以假设除了数字 0 之外，这两个数都不会以 0 开头。
 
 */
+    let arr1 = [9, 5],
+        arr2 = [8, 5];
+
     function ListNode(val) {
         this.val = val;
         this.next = null;
     }
-    const twoSum = function (nums, target) {
-        for (let i = 0; i < nums.length; i++) {
-            for (let j = i + 1; j < nums.length; j++) {
-                if (nums[i] + nums[j] === target) {
-                    return [i, j];
-                }
-            }
+
+    function addNode(arr) {
+        let node = {
+            val: null,
+            next: null
+        };
+        let head = node;
+        for (let i = 0; i < arr.length; i++) {
+            node.next = {
+                val: arr[i],
+                next: null
+            };
+            node = node.next;
         }
+        return head.next;
+    }
+
+    const addTwoNumbers = function (l1, l2) {
+        let currentObj = new ListNode(0);
+        let result = currentObj;//当前结果对象
+        let param = 0; //进位数
+        while (l1 != null || l2 != null) {
+            let temp = (l1 ? l1.val : 0) + (l2 ? l2.val : 0) + param;
+            param = Math.floor(temp / 10);
+            currentObj.next = new ListNode(temp % 10);
+            currentObj = currentObj.next;
+            if (l1) l1 = l1.next; //重新赋值两个对象
+            if (l2) l2 = l2.next;
+
+        }
+        if (param > 0) currentObj.next = new ListNode(param);
+        return result.next;
 
     };
-    console.log(twoSum(nums, target));
+    console.log(addTwoNumbers(addNode(arr1), addNode(arr2)));
 
 </script>
 </html>
