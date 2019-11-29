@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> 无重复字符的最长子串</title>
+</head>
+<body>
+
+</body>
+<script>
+    /*给给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度*/
+    let str = " ";
+
+    const lengthOfLongestSubstring = function (s) {
+        let maxLength = 0;
+        if (!s) return maxLength;
+        let sArr = s.split('');
+        let temp = [];
+        while (sArr.length > 0) {
+            for (let i = 0; i < sArr.length; i++) {
+                if (temp.includes(sArr[i])) {
+                    maxLength = temp.length > maxLength ? temp.length : maxLength;
+                    sArr.splice(0, 1);
+                    temp = [];
+                    break;//break  跳出for循环（只能用于switch 和 for中） return终止当前函数 continue重新从for循环开始
+                } else {
+                    temp.push(sArr[i]);
+                }
+            }
+        }
+        return maxLength;
+
+    };
+    console.log(lengthOfLongestSubstring(str));
+    const lengthOfLongestSubstring1 = function (s) {
+        let maxLength = 0;
+        if (!s) return maxLength;
+        if (s.length === 1) return 1;
+        let temp = '';
+        while (s.length > 1) {
+            for (let i = 0; i < s.length; i++) {
+                let currentData = s.slice(i, i + 1);
+                if (temp.indexOf(currentData) > -1) {
+                    maxLength = temp.length > maxLength ? temp.length : maxLength;
+                    s = s.substr(1);
+                    temp = '';
+                    break;
+                } else {
+                    temp = temp + currentData;
+                }
+            }
+        }
+        return maxLength;
+
+    };
+    console.log(lengthOfLongestSubstring1(str));
+
+</script>
+</html>
