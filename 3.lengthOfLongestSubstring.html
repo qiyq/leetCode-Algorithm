@@ -35,6 +35,7 @@
     const lengthOfLongestSubstring1 = function (s) {
         let maxLength = 0;
         if (!s) return maxLength;
+
         if (s.length === 1) return 1;
         let temp = '';
         while (s.length > 1) {
